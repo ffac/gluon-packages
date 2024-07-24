@@ -1,3 +1,2 @@
-# run every day at 05:45 and 17:45
-45 5,17 * * * /lib/gluon/mt7915/hotfix.sh
-* * * * * /lib/gluon/mt7915/reboot-on-error.sh
+# run every second minute
+*/2 * * * * /lib/gluon/mt7915/reboot-on-error.sh
