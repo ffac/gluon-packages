@@ -5,8 +5,6 @@ local TTY_DEVICE = arg[1]
 
 local uci = require('simple-uci').cursor()
 
-os.execute("stty -F " .. TTY_DEVICE .. " raw 4800 cs8 clocal -parenb crtscts -cstopb")
-
 -- Use GPS as Stream
 local file = io.open(TTY_DEVICE, "r")
 

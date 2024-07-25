@@ -12,7 +12,7 @@ include $(TOPDIR)/../package/gluon.mk
 
 define Package/$(PKG_NAME)
   TITLE:=Use attached GPS controller to update location from it
-  DEPENDS:=+kmod-usb-core +kmod-usb-ohci +kmod-usb2 +kmod-usb-acm +kmod-usb-serial-pl2303 +coreutils-stty
+  DEPENDS:=+kmod-usb-core +kmod-usb-ohci +kmod-usb2 +kmod-usb-acm +kmod-usb-serial-pl2303 +micrond
 endef
 
 define Package/$(PKG_NAME)/description

@@ -12,6 +12,7 @@ if [ "${ACTION}" = "add" ]; then
 		logger -t hotplug "USB GPS device was plugged in"
 		echo "${DEVPATH}" > "${LOCKPATH}"
 		echo "*/5 * * * *  /usr/bin/update-location-gps /dev/${TTY_NAME} | logger -t update-location-gps" > "/usr/lib/micron.d/update-location-gps"
+		/etc/init.d/micrond restart
 	fi
 fi
 
@@ -20,5 +21,6 @@ if [ "${ACTION}" = "remove" ]; then
 		logger -t hotplug "USB GPS device was removed"
 		rm -f "/usr/lib/micron.d/update-location-gps"
 		rm "${LOCKPATH}"
+		/etc/init.d/micrond restart
 	fi
 fi
