@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2024 Felix Baumann (FFAC)
+# SPDX-FileCopyrightText: 2024 Felix Baumann, Florian Maurer (FFAC)
 # SPDX-License-Identifier: MIT
 include $(TOPDIR)/rules.mk
 
@@ -7,8 +7,6 @@ PKG_VERSION:=1
 PKG_RELEASE:=1
 
 PKG_LICENSE:=MIT
-
-PKG_BUILD_DIR := $(BUILD_DIR)/$(PKG_NAME)
 
 include $(TOPDIR)/../package/gluon.mk
 
