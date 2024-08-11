@@ -15,7 +15,7 @@ include $(TOPDIR)/../package/gluon.mk
 define Package/$(PKG_NAME)
   SECTION:=gluon
   CATEGORY:=Gluon
-  TITLE:=reload mt7915-firmware twice a day
+  TITLE:=restart device if mt7915e driver shows known failure symptom
   DEPENDS:=@(TARGET_mediatek_filogic||TARGET_ramips_mt7621) kmod-mt7915e +gluon-core +micrond
   MAINTAINER:=Freifunk Aachen <kontakt@freifunk-aachen.de>
 endef
