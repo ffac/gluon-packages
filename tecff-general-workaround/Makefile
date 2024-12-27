@@ -8,7 +8,7 @@ PKG_RELEASE:=1
 
 PKG_LICENSE:=GPL-3.0-or-later
 
-include $(INCLUDE_DIR)/package.mk
+include $(TOPDIR)/../package/gluon.mk
 
 define Package/tecff-general-workaround
   SECTION:=tecff
