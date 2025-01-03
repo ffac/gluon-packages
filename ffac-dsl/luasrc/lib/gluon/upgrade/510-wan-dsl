@@ -16,8 +16,17 @@ if enabled == true then
         password=password,
         ipv6='auto',
     })
+    uci:section('firewall','rule','wdsl_dhcpv6',{
+        name = 'DSL DHCPv6',
+        src = 'wdsl',
+        family = 'ipv6',
+        dest_port = '546',
+        proto = 'udp',
+        target = 'ACCEPT',
+    })
 else
     uci:delete('network', 'wdsl')
+    uci:delete('firewall', 'wdsl_dhcpv6')
 end
 
 uci:commit('network')
