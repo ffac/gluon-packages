@@ -37,7 +37,7 @@ fi
 for i in $(ls /sys/class/net/); do
 	# gather a list of interfaces
 	WIRELESS_UCI="$(uci show wireless | grep $i | cut -d"." -f1-2)"
-    if [ -n "$WIRELESS_UCI" ]; then
+	if [ -n "$WIRELESS_UCI" ]; then
 		if [ -n "$WLAN_INTERFACES" ]; then
 			WLAN_INTERFACES="$WLAN_INTERFACES $i"
 		else
@@ -46,16 +46,18 @@ for i in $(ls /sys/class/net/); do
 		# gather a list of devices
 		if expr "$i" : "\(client\|mesh\|owe\)[0-9]" >/dev/null; then
 			WIRELESS_UCI="$(uci show wireless | grep $i | cut -d"." -f1-2)"
-			WLAN_DEVICE="$(uci get ${WIRELESS_UCI}.device)"
-			if [ -n "$WLAN_DEVICES" ]; then
-				if ! expr "$WLAN_DEVICES" : ".*${WLAN_DEVICE}.*" >/dev/null; then
-					WLAN_DEVICES="$WLAN_DEVICES $WLAN_DEVICE"
+			for WUCI in $WIRELESS_UCI; do
+				WLAN_DEVICE="$(uci get ${WUCI}.device)"
+				if [ -n "$WLAN_DEVICES" ]; then
+					if ! expr "$WLAN_DEVICES" : ".*${WLAN_DEVICE}.*" >/dev/null; then
+						WLAN_DEVICES="$WLAN_DEVICES $WLAN_DEVICE"
+					fi
+				else
+					WLAN_DEVICES="$WLAN_DEVICE"
 				fi
-			else
-				WLAN_DEVICES="$WLAN_DEVICE"
-			fi
+				WLAN_DEVICE=
+			done
 			WIRELESS_UCI=
-			WLAN_DEVICE=
 		fi
 	fi
 done
