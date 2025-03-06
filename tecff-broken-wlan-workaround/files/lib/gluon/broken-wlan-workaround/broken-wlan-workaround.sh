@@ -36,7 +36,7 @@ fi
 # check if node uses a wlan driver and gather interfaces and devices
 for i in $(ls /sys/class/net/); do
 	# gather a list of interfaces
-	WIRELESS_UCI="$(uci show wireless | grep $i | cut -d"." -f1-2)"
+	WIRELESS_UCI="$(uci show wireless | grep $i | cut -d"." -f1-2 | head -n1)"
     if [ -n "$WIRELESS_UCI" ]; then
 		if [ -n "$WLAN_INTERFACES" ]; then
 			WLAN_INTERFACES="$WLAN_INTERFACES $i"
@@ -45,7 +45,6 @@ for i in $(ls /sys/class/net/); do
 		fi
 		# gather a list of devices
 		if expr "$i" : "\(client\|mesh\|owe\)[0-9]" >/dev/null; then
-			WIRELESS_UCI="$(uci show wireless | grep $i | cut -d"." -f1-2)"
 			WLAN_DEVICE="$(uci get ${WIRELESS_UCI}.device)"
 			if [ -n "$WLAN_DEVICES" ]; then
 				if ! expr "$WLAN_DEVICES" : ".*${WLAN_DEVICE}.*" >/dev/null; then
