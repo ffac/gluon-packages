@@ -1,0 +1,2 @@
+config settings 'settings'
+	option max_inactivity_time '10'

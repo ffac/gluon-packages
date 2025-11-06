@@ -1,0 +1,14 @@
+#!/usr/bin/lua
+
+local uci = require('simple-uci').cursor()
+local max_inactivity_time = uci:get('mt7915-maxinactivity', 'settings', 'max_inactivity_time')
+
+-- fixes for mt7915 disassoc issues
+-- https://github.com/openwrt/mt76/issues/1009
+uci:foreach('wireless', 'wifi-iface', function(config)
+        local name = config['.name']
+        if name:match('^client_') then
+                uci:set('wireless', name, 'max_inactivity', max_inactivity_time)
+        end
+end)
+uci:commit('wireless')
