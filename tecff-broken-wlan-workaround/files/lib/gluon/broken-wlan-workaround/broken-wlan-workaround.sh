@@ -20,7 +20,7 @@ if [ ! -d /sys/class/ieee80211 ] || [ "$(ls -l /sys/class/ieee80211/ | wc -l)" -
 fi
 
 # don't do anything while an autoupdater process is running
-if [ -f '/tmp/autoupdate.lock' ] ; then
+if ! flock -n /var/lock/autoupdater.lock true 2>/dev/null; then
 	logger -s -t "$SCRIPTNAME" -p 5 "autoupdater is running, aborting."
 	exit
 fi
